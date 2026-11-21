@@ -1,0 +1,85 @@
+[ocr] Skipping README.md — filtered by path/extension rules
+[ocr] Skipping requirements.txt — filtered by path/extension rules
+[ocr] Filtered 2 file(s) by include/exclude rules
+[ocr] full-scan: 25 file(s) discovered, reviewing 23 in /tmp/pe-techdd-scan-work/quillmoor-ledger
+[ocr] estimated cost: ~19 file(s), est. 329K input + 96K output ≈ 425K total tokens (rough; actual reported after run)
+[ocr] scan dispatch: 3 batch(es) by by-language strategy
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (1ms)
+[ocr] scan dedup batch #1: 15 → 11 comments
+[ocr]   ▶ code_search file_patterns=[ledgerloop/**/*.py]
+[ocr]   ✔ code_search (12ms)
+[ocr]   ▶ code_search file_patterns=[ledgerloop/**/*.py]
+[ocr]   ✔ code_search (3ms)
+[ocr]   ▶ file_find query_name=imports
+[ocr]   ✔ file_find (2ms)
+[ocr]   ▶ file_read file_path=ledgerloop/services/imports.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_find query_name=webhooks
+[ocr]   ✔ file_find (2ms)
+[ocr]   ▶ file_read file_path=ledgerloop/services/webhooks.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_find query_name=auth
+[ocr]   ✔ file_find (2ms)
+[ocr]   ▶ file_read file_path=ledgerloop/auth.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_find query_name=config
+[ocr]   ✔ file_find (2ms)
+[ocr]   ▶ file_read file_path=ledgerloop/config.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✘ code_comment failed: Error: failed to parse 'comments' JSON string: unexpected end of JSON input
+[ocr]   ▶ code_search search_text=def list_payments_ordered
+[ocr]   ✔ code_search (3ms)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ file_read file_path=ledgerloop/db.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_read file_path=ledgerloop/services/payments.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ✔ code_comment (29.986s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (7.29s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (1ms)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✘ code_comment failed: Error: failed to parse 'comments' JSON string: unexpected end of JSON input
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr] scan dedup batch #2: 84 → 75 comments
+[ocr] Results written to results/run3-nemotron-ultra/scan.json

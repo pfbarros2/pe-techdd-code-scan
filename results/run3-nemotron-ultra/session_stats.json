@@ -1,0 +1,48 @@
+{
+  "session_id": "5bd94b00-9926-4185-9c73-36822443c88e",
+  "llm_requests": 66,
+  "llm_responses": 66,
+  "tool_calls": 38,
+  "event_counts": {
+    "session_start": 1,
+    "llm_request": 66,
+    "llm_response": 66,
+    "tool_call": 38,
+    "review_item_done": 23,
+    "session_end": 1
+  },
+  "llm_requests_per_file": {
+    "__scan_dedup_batch_1__": 1,
+    "__scan_dedup_batch_2__": 1,
+    "__scan_project_summary__": 1,
+    "ledgerloop/__init__.py": 1,
+    "ledgerloop/app.py": 12,
+    "ledgerloop/auth.py": 2,
+    "ledgerloop/config.py": 3,
+    "ledgerloop/db.py": 2,
+    "ledgerloop/routes/__init__.py": 1,
+    "ledgerloop/routes/auth_routes.py": 6,
+    "ledgerloop/routes/exports.py": 3,
+    "ledgerloop/routes/invoices.py": 2,
+    "ledgerloop/routes/payments.py": 8,
+    "ledgerloop/services/__init__.py": 1,
+    "ledgerloop/services/imports.py": 2,
+    "ledgerloop/services/notifications.py": 2,
+    "ledgerloop/services/payments.py": 2,
+    "ledgerloop/services/reports.py": 2,
+    "ledgerloop/services/webhooks.py": 2,
+    "ledgerloop/utils/__init__.py": 1,
+    "ledgerloop/utils/crypto.py": 2,
+    "ledgerloop/workers/__init__.py": 1,
+    "ledgerloop/workers/billing.py": 2,
+    "web/static/js/api.js": 2,
+    "web/static/js/dashboard.js": 2,
+    "web/templates/dashboard.html": 2
+  },
+  "usage_from_session_log": {
+    "cache_read_tokens": 197280,
+    "cache_write_tokens": 0,
+    "completion_tokens": 68396,
+    "prompt_tokens": 405256
+  }
+}

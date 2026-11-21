@@ -1,0 +1,11 @@
+{
+  "label": "run3-nemotron-ultra",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "base_url": "https://integrate.api.nvidia.com/v1",
+  "temperature": 0,
+  "started_utc": "2026-11-21T12:43:02Z",
+  "finished_utc": "2026-11-21T12:52:31Z",
+  "exit_code": 0,
+  "ocr_version": "open-code-review v1.14.0 (d29ca204) linux/amd64",
+  "command": "ocr scan --repo <isolated fixture copy> --format json --concurrency 4"
+}

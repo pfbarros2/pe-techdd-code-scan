@@ -1,0 +1,503 @@
+{
+ "fixture": "fixture/quillmoor-ledger",
+ "note": "Ground truth for the FICTIONAL LedgerLoop codebase. Line numbers are resolved at scoring time from 'anchors' (exact substrings of the target line). This file is NOT copied into the scan workspace. 'related' lists other files on the same data flow (e.g. the route feeding a vulnerable helper). Decoy 'lure' is the vulnerability class the safe code superficially resembles. Rules v2 (related locations, lures, tightened keyword patterns, multi-issue credit) were introduced after inspecting run 1; see README 'Scoring method'.",
+ "planted": [
+  {
+   "id": "P01",
+   "file": "ledgerloop/db.py",
+   "category": "sql_injection",
+   "severity": "critical",
+   "anchors": [
+    "customer_name LIKE '%{name}%'"
+   ],
+   "description": "Customer name search builds SQL with an f-string from the query string.",
+   "related": [
+    {
+     "file": "ledgerloop/routes/invoices.py",
+     "anchors": [
+      "rows = db.find_invoices_by_customer_name("
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P02",
+   "file": "ledgerloop/db.py",
+   "category": "sql_injection",
+   "severity": "high",
+   "anchors": [
+    "ORDER BY \" + order_clause"
+   ],
+   "description": "Payments ORDER BY clause concatenated from the 'order' request parameter.",
+   "related": [
+    {
+     "file": "ledgerloop/routes/payments.py",
+     "anchors": [
+      "order = request.args.get(\"order\""
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P03",
+   "file": "ledgerloop/routes/invoices.py",
+   "category": "xss",
+   "severity": "high",
+   "anchors": [
+    "Welcome, {company}!"
+   ],
+   "description": "Reflected XSS: 'company' query parameter rendered into HTML unescaped."
+  },
+  {
+   "id": "P04",
+   "file": "web/static/js/dashboard.js",
+   "category": "xss",
+   "severity": "high",
+   "anchors": [
+    "container.innerHTML ="
+   ],
+   "description": "Stored XSS: customer notes assigned to innerHTML."
+  },
+  {
+   "id": "P05",
+   "file": "ledgerloop/config.py",
+   "category": "hardcoded_secret",
+   "severity": "high",
+   "anchors": [
+    "PAYRIVER_SECRET = \"FAKE_"
+   ],
+   "description": "Payment gateway secret hardcoded in source (FAKE value)."
+  },
+  {
+   "id": "P06",
+   "file": "ledgerloop/config.py",
+   "category": "hardcoded_secret",
+   "severity": "high",
+   "anchors": [
+    "or \"FAKE-jwt-signing-key-for-demo-only\""
+   ],
+   "description": "JWT signing key falls back to a hardcoded default (FAKE value)."
+  },
+  {
+   "id": "P07",
+   "file": "ledgerloop/config.py",
+   "category": "hardcoded_secret",
+   "severity": "medium",
+   "anchors": [
+    "FAKE-Db-Passw0rd-demo-only"
+   ],
+   "description": "Database password embedded in default connection string (FAKE value)."
+  },
+  {
+   "id": "P08",
+   "file": "ledgerloop/auth.py",
+   "category": "auth_bypass",
+   "severity": "critical",
+   "anchors": [
+    "X-Debug-Admin"
+   ],
+   "description": "Any client can become admin by sending X-Debug-Admin: 1."
+  },
+  {
+   "id": "P09",
+   "file": "ledgerloop/routes/invoices.py",
+   "category": "auth_bypass",
+   "severity": "high",
+   "anchors": [
+    "invoice = db.get_invoice(invoice_id)"
+   ],
+   "description": "IDOR: invoice fetched by id without tenant ownership check."
+  },
+  {
+   "id": "P10",
+   "file": "ledgerloop/auth.py",
+   "category": "auth_bypass",
+   "severity": "critical",
+   "anchors": [
+    "if header.get(\"alg\") == \"none\":",
+    "options={\"verify_signature\": False}"
+   ],
+   "description": "JWTs with alg=none are accepted without signature verification."
+  },
+  {
+   "id": "P11",
+   "file": "ledgerloop/workers/billing.py",
+   "category": "race_condition",
+   "severity": "medium",
+   "anchors": [
+    "invoices_generated += 1"
+   ],
+   "description": "Global counter incremented from 16 worker threads without a lock."
+  },
+  {
+   "id": "P12",
+   "file": "ledgerloop/services/payments.py",
+   "category": "race_condition",
+   "severity": "high",
+   "anchors": [
+    "balance = db.get_account_balance(account_id)",
+    "db.set_account_balance(account_id, balance - amount_pence)"
+   ],
+   "description": "Check-then-act on account balance allows concurrent double withdrawal."
+  },
+  {
+   "id": "P13",
+   "file": "ledgerloop/routes/invoices.py",
+   "category": "null_handling",
+   "severity": "medium",
+   "anchors": [
+    "notifications.send_email(customer[\"email\"]"
+   ],
+   "description": "get_customer may return None; subscript raises TypeError (500)."
+  },
+  {
+   "id": "P14",
+   "file": "ledgerloop/services/reports.py",
+   "category": "null_handling",
+   "severity": "medium",
+   "anchors": [
+    "return contact[\"email\"].lower()"
+   ],
+   "description": "query_one may return None when no primary contact exists."
+  },
+  {
+   "id": "P15",
+   "file": "web/static/js/dashboard.js",
+   "category": "null_handling",
+   "severity": "low",
+   "anchors": [
+    "data.user.profile.displayName"
+   ],
+   "description": "Deep property access without null checks."
+  },
+  {
+   "id": "P16",
+   "file": "ledgerloop/services/imports.py",
+   "category": "insecure_deserialization",
+   "severity": "critical",
+   "anchors": [
+    "pickle.loads("
+   ],
+   "description": "pickle.loads on a client-controlled cookie allows remote code execution.",
+   "related": [
+    {
+     "file": "ledgerloop/app.py",
+     "anchors": [
+      "return jsonify(imports.load_saved_layout(saved))"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P17",
+   "file": "ledgerloop/services/imports.py",
+   "category": "insecure_deserialization",
+   "severity": "high",
+   "anchors": [
+    "yaml.load(uploaded, Loader=yaml.Loader)"
+   ],
+   "description": "Unsafe YAML loader on uploaded file.",
+   "related": [
+    {
+     "file": "ledgerloop/app.py",
+     "anchors": [
+      "return jsonify(imports.import_mapping_yaml(request.get_data()))"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P18",
+   "file": "ledgerloop/utils/crypto.py",
+   "category": "weak_crypto",
+   "severity": "high",
+   "anchors": [
+    "hashlib.md5(password.encode(\"utf-8\"))"
+   ],
+   "description": "Unsalted MD5 used for password hashing."
+  },
+  {
+   "id": "P19",
+   "file": "ledgerloop/utils/crypto.py",
+   "category": "weak_crypto",
+   "severity": "high",
+   "anchors": [
+    "random.choice(alphabet)"
+   ],
+   "description": "Password reset tokens generated with non-cryptographic PRNG."
+  },
+  {
+   "id": "P20",
+   "file": "ledgerloop/utils/crypto.py",
+   "category": "weak_crypto",
+   "severity": "medium",
+   "anchors": [
+    "AES.MODE_ECB"
+   ],
+   "description": "AES in ECB mode for field encryption; key derived from JWT key."
+  },
+  {
+   "id": "P21",
+   "file": "ledgerloop/routes/payments.py",
+   "category": "input_validation",
+   "severity": "high",
+   "anchors": [
+    "amount_pence = int(body[\"amount_pence\"])"
+   ],
+   "description": "Refund amount not validated: negative or excessive refunds accepted.",
+   "related": [
+    {
+     "file": "ledgerloop/services/payments.py",
+     "anchors": [
+      "\"UPDATE invoices SET paid_pence = paid_pence - ? WHERE id = ?\""
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P22",
+   "file": "ledgerloop/routes/exports.py",
+   "category": "path_traversal",
+   "severity": "high",
+   "anchors": [
+    "path = os.path.join(settings.EXPORT_DIR, filename)"
+   ],
+   "description": "User-supplied filename joined to export dir without normalisation (path traversal)."
+  },
+  {
+   "id": "P23",
+   "file": "ledgerloop/routes/exports.py",
+   "category": "command_injection",
+   "severity": "critical",
+   "anchors": [
+    "shell=True"
+   ],
+   "description": "Report name interpolated into a shell command."
+  },
+  {
+   "id": "P24",
+   "file": "ledgerloop/services/webhooks.py",
+   "category": "ssrf",
+   "severity": "medium",
+   "anchors": [
+    "resp = requests.get(target_url",
+    "target_url, data=json.dumps(event), timeout=settings.WEBHOOK_TIMEOUT_SECONDS"
+   ],
+   "description": "Server fetches tenant-supplied URLs without restricting internal addresses (SSRF).",
+   "related": [
+    {
+     "file": "ledgerloop/app.py",
+     "anchors": [
+      "return jsonify({\"preview\": webhooks.test_webhook(url)})"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P25",
+   "file": "ledgerloop/auth.py",
+   "category": "sensitive_logging",
+   "severity": "medium",
+   "anchors": [
+    "password=%s"
+   ],
+   "description": "Plaintext password written to logs on every login."
+  },
+  {
+   "id": "P26",
+   "file": "ledgerloop/services/payments.py",
+   "category": "sensitive_logging",
+   "severity": "medium",
+   "anchors": [
+    "card=%s"
+   ],
+   "description": "Full card number (PAN) written to logs.",
+   "related": [
+    {
+     "file": "ledgerloop/routes/payments.py",
+     "anchors": [
+      "payment_service.log_charge_attempt(g.user[\"id\"], card"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P27",
+   "file": "ledgerloop/auth.py",
+   "category": "timing_attack",
+   "severity": "low",
+   "anchors": [
+    "return presented == expected"
+   ],
+   "description": "Secret compared with == (non-constant time)."
+  },
+  {
+   "id": "P28",
+   "file": "ledgerloop/services/payments.py",
+   "category": "error_handling",
+   "severity": "medium",
+   "anchors": [
+    "except Exception:",
+    "return {\"ok\": True, \"charge_id\": None}"
+   ],
+   "description": "Gateway failures swallowed and reported as successful charges."
+  },
+  {
+   "id": "P29",
+   "file": "web/static/js/api.js",
+   "category": "code_injection",
+   "severity": "high",
+   "anchors": [
+    "return eval("
+   ],
+   "description": "eval() on a server response."
+  },
+  {
+   "id": "P30",
+   "file": "ledgerloop/routes/auth_routes.py",
+   "category": "open_redirect",
+   "severity": "medium",
+   "anchors": [
+    "target = request.args.get(\"next\", \"/\")"
+   ],
+   "description": "Unvalidated 'next' parameter used in redirect."
+  }
+ ],
+ "decoys": [
+  {
+   "id": "D01",
+   "file": "ledgerloop/db.py",
+   "anchors": [
+    "ORDER BY \" + sort_by"
+   ],
+   "why_safe": "sort_by is checked against ALLOWED_SORT_COLUMNS and direction is normalised to ASC/DESC.",
+   "lure": "sql_injection"
+  },
+  {
+   "id": "D02",
+   "file": "ledgerloop/utils/crypto.py",
+   "anchors": [
+    "usedforsecurity=False"
+   ],
+   "why_safe": "MD5 used only as a non-security cache key, explicitly flagged usedforsecurity=False.",
+   "lure": "weak_crypto"
+  },
+  {
+   "id": "D03",
+   "file": "ledgerloop/utils/crypto.py",
+   "anchors": [
+    "hmac.compare_digest"
+   ],
+   "why_safe": "Constant-time comparison.",
+   "lure": "timing_attack"
+  },
+  {
+   "id": "D04",
+   "file": "ledgerloop/utils/crypto.py",
+   "anchors": [
+    "secrets.token_urlsafe(32)"
+   ],
+   "why_safe": "CSPRNG for API keys.",
+   "lure": "weak_crypto"
+  },
+  {
+   "id": "D05",
+   "file": "ledgerloop/routes/exports.py",
+   "anchors": [
+    "[\"tar\", \"-czf\""
+   ],
+   "why_safe": "Argument list, no shell, tenant id coerced to int.",
+   "lure": "command_injection"
+  },
+  {
+   "id": "D06",
+   "file": "ledgerloop/routes/invoices.py",
+   "anchors": [
+    "title = escape(invoice[\"customer_name\"])"
+   ],
+   "why_safe": "Value HTML-escaped with markupsafe before interpolation.",
+   "lure": "xss"
+  },
+  {
+   "id": "D07",
+   "file": "ledgerloop/routes/auth_routes.py",
+   "anchors": [
+    "if host not in settings.ALLOWED_REDIRECT_HOSTS:"
+   ],
+   "why_safe": "Redirect target host checked against an allowlist.",
+   "lure": "open_redirect"
+  },
+  {
+   "id": "D08",
+   "file": "ledgerloop/services/imports.py",
+   "anchors": [
+    "yaml.safe_load(uploaded)"
+   ],
+   "why_safe": "Safe YAML loader.",
+   "lure": "insecure_deserialization"
+  },
+  {
+   "id": "D09",
+   "file": "ledgerloop/services/imports.py",
+   "anchors": [
+    "layout = json.loads(raw)"
+   ],
+   "why_safe": "JSON parsing with type check, not pickle.",
+   "lure": "insecure_deserialization"
+  },
+  {
+   "id": "D10",
+   "file": "ledgerloop/services/reports.py",
+   "anchors": [
+    "random.choice(CHART_COLOURS)"
+   ],
+   "why_safe": "Non-security randomness for chart colours.",
+   "lure": "weak_crypto"
+  },
+  {
+   "id": "D11",
+   "file": "ledgerloop/config.py",
+   "anchors": [
+    "PASSWORD_MIN_LENGTH = 12"
+   ],
+   "why_safe": "Policy constant, not a credential.",
+   "lure": "hardcoded_secret"
+  },
+  {
+   "id": "D12",
+   "file": "web/static/js/dashboard.js",
+   "anchors": [
+    "name.textContent = invoice.customer_name"
+   ],
+   "why_safe": "textContent does not parse HTML.",
+   "lure": "xss"
+  },
+  {
+   "id": "D13",
+   "file": "web/static/js/api.js",
+   "anchors": [
+    "return JSON.parse(text)"
+   ],
+   "why_safe": "JSON.parse, not eval.",
+   "lure": "code_injection"
+  },
+  {
+   "id": "D14",
+   "file": "ledgerloop/workers/billing.py",
+   "anchors": [
+    "_stats[\"failed\"] += 1"
+   ],
+   "why_safe": "Increment guarded by _stats_lock.",
+   "lure": "race_condition"
+  },
+  {
+   "id": "D15",
+   "file": "ledgerloop/services/reports.py",
+   "anchors": [
+    "if revenue_pence == 0:"
+   ],
+   "why_safe": "Division by zero guarded.",
+   "lure": "input_validation"
+  }
+ ]
+}

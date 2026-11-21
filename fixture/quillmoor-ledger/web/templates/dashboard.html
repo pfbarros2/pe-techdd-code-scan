@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LedgerLoop dashboard</title>
+  <script type="module" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</head>
+<body>
+  <header><span id="greeting"></span> <span id="overdue" class="badge" hidden></span></header>
+  <main>
+    <h2>Invoices for {{ tenant_name }}</h2>
+    <table id="invoices"><thead><tr><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody></tbody></table>
+    <section id="customer-notes" data-customer-id="{{ customer_id }}"></section>
+    <footer>{{ footer_text }}</footer>
+  </main>
+</body>
+</html>

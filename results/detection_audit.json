@@ -1,0 +1,61 @@
+{
+  "method": "Manual check by the demo author (judgement): for each run, every planted issue credited by the rules was checked for at least one matched finding that is genuinely about that issue. Also lists findings that the rules credited first but that are about something else (keyword mis-credits).",
+  "runs": {
+    "run1-nemotron-ultra": {
+      "credited_issues_without_on_topic_finding": [],
+      "miscredited_findings": [
+        {
+          "idx": 14,
+          "credited": [
+            "P26"
+          ],
+          "note": "lazy-logging performance comment; P26 genuinely found by #78"
+        },
+        {
+          "idx": 58,
+          "credited": [],
+          "note": "missing transaction in issue_refund; counted as duplicate of P21"
+        }
+      ]
+    },
+    "run2-nemotron-ultra": {
+      "credited_issues_without_on_topic_finding": [],
+      "miscredited_findings": [
+        {
+          "idx": 24,
+          "credited": [
+            "P16"
+          ],
+          "note": "error handling around load_saved_layout; P16 genuinely found by #77"
+        },
+        {
+          "idx": 36,
+          "credited": [
+            "P21"
+          ],
+          "note": "KeyError risk; P21 genuinely found by #62"
+        },
+        {
+          "idx": 57,
+          "credited": [
+            "P05",
+            "P06"
+          ],
+          "note": "empty-string fallback of JWT key: on topic for P06, not for P05; P05 genuinely found by #80"
+        }
+      ]
+    },
+    "run3-nemotron-ultra": {
+      "credited_issues_without_on_topic_finding": [],
+      "miscredited_findings": [
+        {
+          "idx": 69,
+          "credited": [
+            "P11"
+          ],
+          "note": "exception swallowing in billing worker; P11 genuinely found by #88"
+        }
+      ]
+    }
+  }
+}

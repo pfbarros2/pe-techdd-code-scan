@@ -1,0 +1,1390 @@
+{
+  "summary": {
+    "findings_total": 89,
+    "planted_total": 30,
+    "planted_detected": 28,
+    "recall": 0.9333,
+    "true_positive_findings": 29,
+    "duplicate_findings": 3,
+    "near_miss_findings": 18,
+    "decoy_false_positives": 1,
+    "decoys_flagged": [
+      "D02"
+    ],
+    "decoys_total": 15,
+    "unplanted_findings": 41,
+    "precision_strict": 0.3258,
+    "precision_unique": 0.3182,
+    "by_category": {
+      "sql_injection": {
+        "planted": 2,
+        "detected": 2,
+        "ids_missed": []
+      },
+      "xss": {
+        "planted": 2,
+        "detected": 2,
+        "ids_missed": []
+      },
+      "hardcoded_secret": {
+        "planted": 3,
+        "detected": 3,
+        "ids_missed": []
+      },
+      "auth_bypass": {
+        "planted": 3,
+        "detected": 2,
+        "ids_missed": [
+          "P09"
+        ]
+      },
+      "race_condition": {
+        "planted": 2,
+        "detected": 2,
+        "ids_missed": []
+      },
+      "null_handling": {
+        "planted": 3,
+        "detected": 2,
+        "ids_missed": [
+          "P15"
+        ]
+      },
+      "insecure_deserialization": {
+        "planted": 2,
+        "detected": 2,
+        "ids_missed": []
+      },
+      "weak_crypto": {
+        "planted": 3,
+        "detected": 3,
+        "ids_missed": []
+      },
+      "input_validation": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      },
+      "path_traversal": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      },
+      "command_injection": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      },
+      "ssrf": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      },
+      "sensitive_logging": {
+        "planted": 2,
+        "detected": 2,
+        "ids_missed": []
+      },
+      "timing_attack": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      },
+      "error_handling": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      },
+      "code_injection": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      },
+      "open_redirect": {
+        "planted": 1,
+        "detected": 1,
+        "ids_missed": []
+      }
+    },
+    "by_severity": {
+      "critical": {
+        "planted": 5,
+        "detected": 5
+      },
+      "high": {
+        "planted": 13,
+        "detected": 12
+      },
+      "medium": {
+        "planted": 10,
+        "detected": 10
+      },
+      "low": {
+        "planted": 2,
+        "detected": 1
+      }
+    },
+    "missed_ids": [
+      "P09",
+      "P15"
+    ]
+  },
+  "findings": [
+    {
+      "idx": 0,
+      "path": "web/templates/dashboard.html",
+      "start_line": 9,
+      "end_line": 9,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `<header>` element contains only `<span>` elements without a proper heading (`<h1>`). For accessibility and semantic HTML, the page should have a top-level heading. Consider adding an `<h1>` inside the header or promoting the existing `<h2>` to `<h1>` and adjusting the invoice heading accordingly."
+    },
+    {
+      "idx": 1,
+      "path": "web/static/js/api.js",
+      "start_line": 11,
+      "end_line": 13,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Error messages only include HTTP status code, not the response body. For debugging, it's helpful to include the response text when available, especially for 4xx/5xx errors where the server often returns a JSON error object with details."
+    },
+    {
+      "idx": 2,
+      "path": "web/static/js/dashboard.js",
+      "start_line": 36,
+      "end_line": 36,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Magic number `99` for the overdue badge cap. Should be a named constant for clarity and maintainability."
+    },
+    {
+      "idx": 3,
+      "path": "web/static/js/dashboard.js",
+      "start_line": 4,
+      "end_line": 4,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Currency hardcoded to GBP (`new Intl.NumberFormat(\"en-GB\", { style: \"currency\", currency: \"GBP\" })`). If the application ever supports multiple currencies, this will need to be dynamic. Consider reading from user preferences or a config."
+    },
+    {
+      "idx": 4,
+      "path": "ledgerloop/auth.py",
+      "start_line": 91,
+      "end_line": 98,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P25"
+      ],
+      "decoy_id": null,
+      "content": "Internal import in authenticate function: The `verify_password` function is imported inside the function body rather than at module level. This is unusual for a non-optional dependency and makes the dependency graph harder to follow. Move the import to the top of the module."
+    },
+    {
+      "idx": 5,
+      "path": "ledgerloop/db.py",
+      "start_line": 6,
+      "end_line": 6,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `settings` import from `.config` is never used in this module. Remove it to avoid confusion."
+    },
+    {
+      "idx": 6,
+      "path": "ledgerloop/db.py",
+      "start_line": 8,
+      "end_line": 8,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `log` logger is created but never used. Either use it for logging database operations/errors or remove it."
+    },
+    {
+      "idx": 7,
+      "path": "ledgerloop/app.py",
+      "start_line": 12,
+      "end_line": 16,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "LOW: `logging.basicConfig(level=logging.INFO)` is called inside `create_app()`. This function should typically be called once at application startup. If `create_app()` is called multiple times (e.g., in tests), subsequent calls have no effect but it's still not ideal. Consider moving logging configuration to module level or a dedicated initialization function."
+    },
+    {
+      "idx": 8,
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 12,
+      "end_line": 17,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P01"
+      ],
+      "decoy_id": null,
+      "content": "Missing validation for empty search: The `search` endpoint passes an empty string to `db.find_invoices_by_customer_name` when the `customer` query param is omitted. This may return all invoices for the tenant, which could be a performance issue or information disclosure. Consider requiring a minimum query length or returning an empty list for empty queries."
+    },
+    {
+      "idx": 9,
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 37,
+      "end_line": 44,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Assumes `lines` exist and have `amount_pence`: In `invoice_summary`, the code assumes `invoice.get(\"lines\", [])` returns a list of dicts each with an `amount_pence` key. If the data is malformed (missing key, wrong type), this will raise a `KeyError` or `TypeError`. Consider defensive coding with `.get(\"amount_pence\", 0)` or validation."
+    },
+    {
+      "idx": 10,
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 16,
+      "end_line": 16,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Using `request.get_json(force=True)` forces JSON parsing even when the Content-Type header is not application/json. This can cause confusing errors for clients sending form data or other content types. Consider removing `force=True` to respect the Content-Type header, or explicitly check the content type and return a 415 Unsupported Media Type error."
+    },
+    {
+      "idx": 11,
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 0,
+      "end_line": 0,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `/register` endpoint does not validate the email format. Invalid email addresses (e.g., missing @, invalid domain) will be accepted and stored. Add basic email format validation."
+    },
+    {
+      "idx": 12,
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 52,
+      "end_line": 52,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `charge_card` function uses a hardcoded timeout of 10 seconds. This should be configurable via settings to allow tuning for different environments and SLAs."
+    },
+    {
+      "idx": 13,
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 42,
+      "end_line": 42,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P26"
+      ],
+      "decoy_id": null,
+      "content": "The `log_charge_attempt` function lacks type hints for its parameters. Adding type hints would improve code clarity and enable static analysis."
+    },
+    {
+      "idx": 14,
+      "path": "ledgerloop/services/imports.py",
+      "start_line": 42,
+      "end_line": 44,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P17"
+      ],
+      "decoy_id": null,
+      "content": "MAINTAINABILITY: `import_settings_yaml` silently returns empty dict for non-dict YAML (e.g., a list or scalar). This could hide data errors. Consider raising an error or at least logging a warning when the structure is unexpected."
+    },
+    {
+      "idx": 15,
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 36,
+      "end_line": 37,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "`chart_palette` uses `random.choice` in a list comprehension, which calls the random module's global lock for each iteration. For small `n` this is negligible, but if called with large `n` on a hot path, consider `random.choices(CHART_COLOURS, k=n)` which is more efficient (single call)."
+    },
+    {
+      "idx": 16,
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 12,
+      "end_line": 16,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P24"
+      ],
+      "decoy_id": null,
+      "content": "`deliver()` appears to be a less secure duplicate of `deliver_checked()`. If `deliver_checked()` is the intended public API, consider deprecating or removing `deliver()` to avoid accidental use of the unsafe version. If both are needed, rename `deliver()` to something like `deliver_unchecked()` to make the risk explicit."
+    },
+    {
+      "idx": 17,
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 53,
+      "end_line": 56,
+      "status": "decoy_false_positive",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": "D02",
+      "content": "LOW: cache_key uses MD5 with usedforsecurity=False. While marked as non-security, MD5 is still cryptographically weak. Consider using SHA256 or BLAKE2b for cache keys to avoid any future concerns."
+    },
+    {
+      "idx": 18,
+      "path": "web/templates/dashboard.html",
+      "start_line": 11,
+      "end_line": 14,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Template variables `tenant_name`, `customer_id`, and `footer_text` are used without default values or existence checks. If the view function fails to pass any of these variables, Jinja2 will raise an `UndefinedError` (or render empty string depending on configuration), potentially breaking the page. Consider providing defaults in the template or ensuring the view always passes them."
+    },
+    {
+      "idx": 19,
+      "path": "web/static/js/api.js",
+      "start_line": 9,
+      "end_line": 15,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "No timeout handling for fetch requests. Network requests can hang indefinitely if the server doesn't respond. Consider adding AbortController with a timeout for all fetch calls."
+    },
+    {
+      "idx": 20,
+      "path": "web/static/js/dashboard.js",
+      "start_line": 19,
+      "end_line": 19,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Hardcoded API endpoint URLs scattered across multiple functions. If the API base path or endpoint structure changes, multiple places must be updated. Extract to a constants module or configuration object."
+    },
+    {
+      "idx": 21,
+      "path": "web/static/js/dashboard.js",
+      "start_line": 40,
+      "end_line": 54,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "`renderOverdueBadge` is exported but never called in `init()`. The overdue badge UI element will never be populated unless initialized elsewhere. Either call it in `init()` or remove the export if unused."
+    },
+    {
+      "idx": 22,
+      "path": "web/static/js/dashboard.js",
+      "start_line": 46,
+      "end_line": 49,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "`renderCustomerNotes` reads `notes.dataset.customerId` but doesn't validate it. If the attribute is missing or empty, the API call will be to `/customers/undefined` or `/customers/`, likely causing a 404 or 400. Add a guard."
+    },
+    {
+      "idx": 23,
+      "path": "ledgerloop/auth.py",
+      "start_line": 37,
+      "end_line": 45,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Potential NoneType attribute error in current_user: The decode_token function can return a dict without 'sub', 'tenant', or 'role' keys if the token payload is malformed. The current_user function then accesses these keys directly (`claims[\"sub\"]`, etc.) which will raise KeyError. Add validation that required claims exist before constructing the user dict."
+    },
+    {
+      "idx": 24,
+      "path": "ledgerloop/config.py",
+      "start_line": 9,
+      "end_line": 37,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P05",
+        "P06",
+        "P07"
+      ],
+      "decoy_id": null,
+      "content": "Class attributes (ENV, DEBUG, DATABASE_URL, etc.) are evaluated at module import time, not at Settings instantiation. This means environment variable changes after import won't be reflected. Also, ALLOWED_REDIRECT_HOSTS is a mutable class-level set shared across all instances. Consider using __init__ to read environment variables at instantiation time, or use a proper configuration library like pydantic-settings."
+    },
+    {
+      "idx": 25,
+      "path": "ledgerloop/config.py",
+      "start_line": 24,
+      "end_line": 24,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P05",
+        "P06"
+      ],
+      "decoy_id": null,
+      "content": "JWT_SIGNING_KEY uses `os.environ.get(\"JWT_SIGNING_KEY\") or \"FAKE-jwt-signing-key-for-demo-only\"` which treats empty string as falsy and falls back to the default. If the env var is explicitly set to empty string, the fake key would be used silently. Should check for None explicitly or require the variable to be set."
+    },
+    {
+      "idx": 26,
+      "path": "ledgerloop/db.py",
+      "start_line": 15,
+      "end_line": 22,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Database connections are stored in thread-local storage but never closed. In a long-running application (e.g., a web server), this leaks connections. Consider adding a `close_conn()` function and calling it at request shutdown, or use a connection pool that manages lifecycle."
+    },
+    {
+      "idx": 27,
+      "path": "ledgerloop/db.py",
+      "start_line": 37,
+      "end_line": 41,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `execute` function commits after every statement, which prevents callers from grouping multiple statements into a single transaction. Consider adding a `commit` parameter or a separate `commit()`/`rollback()` API for transaction control."
+    },
+    {
+      "idx": 28,
+      "path": "ledgerloop/db.py",
+      "start_line": 25,
+      "end_line": 29,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "No error handling around database operations. If the database is locked, schema is wrong, or constraints are violated, exceptions will propagate uncaught. Consider wrapping in try/except and logging errors (using the `log` logger) before re-raising, or let a higher layer handle it but document the exceptions."
+    },
+    {
+      "idx": 29,
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 35,
+      "end_line": 36,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "No error handling for subprocess failures. `check=True` will raise `subprocess.CalledProcessError` which bubbles up as a 500 error without a helpful message. Catch the exception and return a proper JSON error response."
+    },
+    {
+      "idx": 30,
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 25,
+      "end_line": 26,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P23"
+      ],
+      "decoy_id": null,
+      "content": "The PDF endpoint assumes `/tmp/{report_name}.html` exists without checking. If the file doesn't exist, wkhtmltopdf will fail with a cryptic error. Validate the input file exists before running the command."
+    },
+    {
+      "idx": 31,
+      "path": "ledgerloop/app.py",
+      "start_line": 38,
+      "end_line": 42,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P24"
+      ],
+      "decoy_id": null,
+      "content": "MEDIUM: `request.get_json(force=True)` forces JSON parsing regardless of Content-Type header. This can lead to unexpected behavior and potential bypasses of content-type validation. Use `request.get_json()` without `force=True` and handle the case where it returns `None` (invalid or missing JSON)."
+    },
+    {
+      "idx": 32,
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 33,
+      "end_line": 33,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Potential ValueError: `int(g.user[\"tenant_id\"])` will raise ValueError if tenant_id is not a valid integer string (e.g., None, empty string, or non-numeric). This would result in a 500 error. Add validation or handle the exception."
+    },
+    {
+      "idx": 33,
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 57,
+      "end_line": 60,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P03"
+      ],
+      "decoy_id": null,
+      "content": "Missing authentication: The `welcome_banner` endpoint lacks the `@login_required` decorator. If this endpoint should be public, that's fine, but if it exposes any tenant-specific information, it should be protected. Confirm the intended access level."
+    },
+    {
+      "idx": 34,
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 63,
+      "end_line": 71,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P03",
+        "P13"
+      ],
+      "decoy_id": null,
+      "content": "Missing error handling for email sending: `notifications.send_email` can raise exceptions (network errors, invalid email, etc.) which would result in a 500 error. Consider catching exceptions and returning an appropriate error response, and logging the failure."
+    },
+    {
+      "idx": 35,
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 63,
+      "end_line": 71,
+      "status": "true_positive",
+      "planted_ids": [
+        "P13"
+      ],
+      "credited_ids": [
+        "P13"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Missing null check for customer: `db.get_customer(invoice[\"customer_id\"])` could return `None` if the customer was deleted, leading to a `TypeError` when accessing `customer[\"email\"]`. Add a guard clause."
+    },
+    {
+      "idx": 36,
+      "path": "ledgerloop/services/notifications.py",
+      "start_line": 6,
+      "end_line": 10,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Module-level mutable global `_outbox` retains state across all calls and grows without bound. In a long-running process (e.g., a web server), this causes a memory leak and is not thread-safe for concurrent access. Consider adding a `clear_outbox()` function, using a thread-safe structure, or making this explicitly test-only with a warning."
+    },
+    {
+      "idx": 37,
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 26,
+      "end_line": 27,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Password reset tokens are stored without an expiration timestamp. If the database is compromised, or if a token is leaked, it remains valid indefinitely. Add a `reset_token_expires` column and set an expiration (e.g., 1 hour) when generating the token. Validate expiration when the token is used."
+    },
+    {
+      "idx": 38,
+      "path": "ledgerloop/services/imports.py",
+      "start_line": 13,
+      "end_line": 22,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "BUG: No validation that required CSV columns ('name', 'email') exist. Will raise KeyError with unhelpful message if columns are missing or named differently. Should validate headers and provide clear error."
+    },
+    {
+      "idx": 39,
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 18,
+      "end_line": 23,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "`ageing_buckets` assumes `row[\"due_date\"]` is always a valid ISO-format date string. If the database contains NULL, empty string, or malformed date, `date.fromisoformat()` will raise `ValueError` or `TypeError`. Add defensive parsing or ensure data integrity at the schema level."
+    },
+    {
+      "idx": 40,
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 13,
+      "end_line": 16,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The cache key uses `cache_key(str(tenant_id), today.isoformat())` but the function also receives `today` as a `date` object. If callers pass different `date` instances representing the same day, the cache will work correctly (since `isoformat()` is deterministic). However, the module-level `_cache` has no eviction policy \u2014 it grows unbounded across the process lifetime. Combined with the concurrency issue above, this is a memory leak risk."
+    },
+    {
+      "idx": 41,
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 33,
+      "end_line": 43,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "TOCTOU (Time-of-Check-Time-of-Use) race: `_is_public_host()` resolves the hostname at validation time, but the actual HTTP request happens later. An attacker could control DNS and change the IP to a private address between check and use. Consider resolving once and passing the IP to requests, or using a DNS-pinning approach. At minimum, document this limitation."
+    },
+    {
+      "idx": 42,
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 19,
+      "end_line": 22,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P24"
+      ],
+      "decoy_id": null,
+      "content": "`test_webhook()` returns `resp.text[:2000]` which assumes the response is text and uses the default encoding. If the endpoint returns binary data or uses an encoding not detected by requests, this may raise UnicodeDecodeError or return garbled text. Use `resp.content[:2000]` and decode with errors='replace', or handle the content-type appropriately."
+    },
+    {
+      "idx": 43,
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 12,
+      "end_line": 16,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P24"
+      ],
+      "decoy_id": null,
+      "content": "Network calls in `deliver()`, `test_webhook()`, and `deliver_checked()` can raise various exceptions (ConnectionError, Timeout, SSLError, etc.) that are not caught. Callers may not expect these to propagate. Consider catching `requests.RequestException` and either returning an error code or raising a custom domain exception."
+    },
+    {
+      "idx": 44,
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 13,
+      "end_line": 13,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "MEDIUM: Key derivation for _FIELD_KEY uses simple SHA256 truncation. This is not a proper key derivation function. If JWT_SIGNING_KEY has low entropy, the derived key will be weak. Use HKDF or PBKDF2 with a salt for key derivation."
+    },
+    {
+      "idx": 45,
+      "path": "ledgerloop/routes/payments.py",
+      "start_line": 18,
+      "end_line": 45,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P21",
+        "P26"
+      ],
+      "decoy_id": null,
+      "content": "No error handling around service calls: Exceptions from `payment_service.issue_refund()`, `payment_service.withdraw()`, and `payment_service.charge_card()` are not caught, resulting in 500 errors with stack traces exposed to clients. Also, `charge_card()` in services/payments.py silently swallows exceptions and returns `{\"ok\": True, \"charge_id\": None}` incorrectly indicating success on failure."
+    },
+    {
+      "idx": 46,
+      "path": "web/templates/dashboard.html",
+      "start_line": 11,
+      "end_line": 14,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Potential XSS vulnerability: The template variables `tenant_name`, `customer_id`, and `footer_text` are rendered directly without explicit escaping. While Jinja2 auto-escaping is typically enabled by default, it can be disabled globally or per-template. If auto-escaping is off, user-controlled data in these variables could execute scripts. Recommend using the `|e` filter explicitly (e.g., `{{ tenant_name|e }}`) for defense-in-depth, especially for `footer_text` which may contain user-generated content."
+    },
+    {
+      "idx": 47,
+      "path": "web/static/js/api.js",
+      "start_line": 29,
+      "end_line": 39,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P29"
+      ],
+      "decoy_id": null,
+      "content": "Missing HTTP error status check in `loadFeatureFlags()` and `loadThemeConfig()`. Unlike `getJSON()` and `postJSON()`, these functions don't check `resp.ok` before parsing the response, which means they'll attempt to parse error responses (HTML error pages, etc.) as JSON, causing confusing errors."
+    },
+    {
+      "idx": 48,
+      "path": "web/static/js/dashboard.js",
+      "start_line": 18,
+      "end_line": 21,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "No error handling in async functions (`renderInvoices`, `renderGreeting`, `renderCustomerNotes`, `renderOverdueBadge`). Unhandled promise rejections leave the UI broken. Wrap each `await getJSON(...)` in try/catch, add null checks (e.g., `data.user?.profile?.displayName`, `customer.notes ?? ''`), and show user-friendly error messages."
+    },
+    {
+      "idx": 49,
+      "path": "ledgerloop/auth.py",
+      "start_line": 48,
+      "end_line": 51,
+      "status": "true_positive",
+      "planted_ids": [
+        "P08"
+      ],
+      "credited_ids": [
+        "P08"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Debug admin backdoor: The is_admin function grants admin access if the header `X-Debug-Admin: 1` is present, bypassing all role checks. This is a dangerous backdoor that should not exist in production code. Remove this condition or guard it behind a strict development-only flag."
+    },
+    {
+      "idx": 50,
+      "path": "ledgerloop/auth.py",
+      "start_line": 78,
+      "end_line": 80,
+      "status": "true_positive",
+      "planted_ids": [
+        "P27"
+      ],
+      "credited_ids": [
+        "P27"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Timing attack vulnerability in service_key_valid: The function uses simple string equality (`==`) to compare the presented API key with the expected secret. This leaks information via timing side-channels, allowing an attacker to brute-force the key character by character. Use constant_time_equals (already imported and used in internal_service_ok) for this comparison as well."
+    },
+    {
+      "idx": 51,
+      "path": "ledgerloop/config.py",
+      "start_line": 14,
+      "end_line": 24,
+      "status": "true_positive",
+      "planted_ids": [
+        "P05",
+        "P06",
+        "P07"
+      ],
+      "credited_ids": [
+        "P05",
+        "P06",
+        "P07"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Hardcoded secrets in source code: DATABASE_URL default contains a password (FAKE-Db-Passw0rd-demo-only), PAYRIVER_SECRET is hardcoded, and JWT_SIGNING_KEY has a hardcoded fallback. Even though marked as 'FAKE' and 'demo-only', committing any secrets to source control is a security risk. These should only be loaded from environment variables with no defaults, or defaults should be clearly invalid placeholders that cause startup failure in production."
+    },
+    {
+      "idx": 52,
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 30,
+      "end_line": 36,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Potential path traversal: `tenant_id` from `g.user` is used to construct a directory path. While `int()` conversion provides some protection, if `EXPORT_DIR` is a symlink or `tenant_id` can be negative/large, it could escape. Validate the resolved path stays within EXPORT_DIR."
+    },
+    {
+      "idx": 53,
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 12,
+      "end_line": 16,
+      "status": "true_positive",
+      "planted_ids": [
+        "P24"
+      ],
+      "credited_ids": [
+        "P24"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "HIGH: SSRF in `deliver` function. This function also makes HTTP requests to user-supplied URLs without validation. While `deliver_checked` exists with proper validation, `deliver` is unprotected. Either deprecate `deliver` or add the same validation."
+    },
+    {
+      "idx": 54,
+      "path": "ledgerloop/app.py",
+      "start_line": 25,
+      "end_line": 47,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P16",
+        "P17",
+        "P24"
+      ],
+      "decoy_id": null,
+      "content": "HIGH: No error handling in route handlers. Exceptions from `imports.load_saved_layout`, `imports.load_layout_json`, `imports.import_mapping_yaml`, and `webhooks.test_webhook` will bubble up as 500 Internal Server Errors without proper error responses. Add try/except blocks to catch expected exceptions (ValueError, pickle.UnpicklingError, yaml.YAMLError, json.JSONDecodeError, requests.RequestException) and return appropriate 4xx responses."
+    },
+    {
+      "idx": 55,
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 57,
+      "end_line": 60,
+      "status": "true_positive",
+      "planted_ids": [
+        "P03"
+      ],
+      "credited_ids": [
+        "P03"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "XSS vulnerability: The `company` parameter from request args is directly interpolated into HTML without escaping. An attacker could inject arbitrary HTML/JavaScript via the `company` query parameter (e.g., `?company=<script>alert(1)</script>`). Use `escape()` from markupsafe (already imported) or return JSON instead of raw HTML."
+    },
+    {
+      "idx": 56,
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 20,
+      "end_line": 25,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Potential SQL injection / unsafe sorting: The `sort_by` and `direction` parameters are user-controlled and passed directly to `db.list_invoices_sorted`. If the database layer uses string interpolation for these values (rather than a whitelist/parameterized approach), this could lead to SQL injection. Even with parameterized queries, allowing arbitrary sort columns could enable information disclosure or DoS. Validate `sort_by` against a whitelist of allowed columns and `direction` against `['asc', 'desc']`."
+    },
+    {
+      "idx": 57,
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 37,
+      "end_line": 40,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `/register` endpoint accepts `tenant_id` directly from the request body without validation. This allows a user to register into any tenant, potentially bypassing tenant isolation. Validate that the tenant_id is allowed (e.g., user is invited to that tenant, or only allow a default tenant for self-registration)."
+    },
+    {
+      "idx": 58,
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 31,
+      "end_line": 40,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `/register` endpoint does not check for existing email addresses. Attempting to register with an email that already exists will likely raise a database integrity error (unique constraint violation), resulting in a 500 Internal Server Error instead of a proper 409 Conflict response. Add a check for existing email before inserting."
+    },
+    {
+      "idx": 59,
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 23,
+      "end_line": 28,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `/password-reset` endpoint claims \"an email was sent\" but there is no email sending code. The reset token is stored in the database but never delivered to the user. This makes password reset non-functional. Either implement email sending or change the response to not claim an email was sent."
+    },
+    {
+      "idx": 60,
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 15,
+      "end_line": 23,
+      "status": "true_positive",
+      "planted_ids": [
+        "P12"
+      ],
+      "credited_ids": [
+        "P12"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `withdraw` function has a check-then-act race condition: it reads the balance, checks if sufficient, then updates. Between the check and update, another thread could withdraw funds, causing overdraft. The balance update and ledger insert should be wrapped in a database transaction for atomicity."
+    },
+    {
+      "idx": 61,
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 26,
+      "end_line": 39,
+      "status": "true_positive",
+      "planted_ids": [
+        "P21"
+      ],
+      "credited_ids": [
+        "P21"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `issue_refund` function does not validate that the refund amount does not exceed the amount already paid on the invoice. This could result in negative `paid_pence` values. Add a check before processing the refund."
+    },
+    {
+      "idx": 62,
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 10,
+      "end_line": 16,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Module-level mutable cache `_cache` is shared across all requests/threads without any synchronization. In a multi-threaded web server (e.g., gunicorn with multiple workers/threads), this can cause race conditions, stale data, and memory leaks (no TTL or size limit). Consider using a thread-safe cache like `functools.lru_cache` with a maxsize, or a proper caching library (Redis, cachetools) with TTL."
+    },
+    {
+      "idx": 63,
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 40,
+      "end_line": 44,
+      "status": "true_positive",
+      "planted_ids": [
+        "P14"
+      ],
+      "credited_ids": [
+        "P14"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "`primary_contact_email` assumes a primary contact always exists. If `db.query_one` returns `None` (no primary contact for the tenant), accessing `contact[\"email\"]` will raise `TypeError: 'NoneType' object is not subscriptable`. Add a None check and decide on appropriate behavior (raise a custom exception, return empty string, etc.)."
+    },
+    {
+      "idx": 64,
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 25,
+      "end_line": 30,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "`_is_public_host()` only resolves IPv4 addresses via `socket.gethostbyname()`. Hostnames with only AAAA (IPv6) records will fail resolution (gaierror) and return False, incorrectly blocking valid public IPv6 endpoints. Use `socket.getaddrinfo()` with `socket.AF_UNSPEC` to resolve both IPv4 and IPv6, then check all returned addresses."
+    },
+    {
+      "idx": 65,
+      "path": "ledgerloop/routes/payments.py",
+      "start_line": 18,
+      "end_line": 25,
+      "status": "duplicate",
+      "planted_ids": [
+        "P21"
+      ],
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Missing input validation and KeyError risk: `refund()` accesses `body[\"invoice_id\"]` and `body[\"amount_pence\"]` directly without checking if keys exist or validating values. This will raise KeyError for missing keys, and accepts negative/zero amounts without validation."
+    },
+    {
+      "idx": 66,
+      "path": "ledgerloop/routes/payments.py",
+      "start_line": 28,
+      "end_line": 36,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Missing input validation and KeyError risk: `transfer()` accesses `body[\"account_id\"]` directly without checking if the key exists. Also, `amount_pence` uses `.get()` with default 0 but the validation only checks upper bound, not that the key was actually provided."
+    },
+    {
+      "idx": 67,
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 25,
+      "end_line": 27,
+      "status": "true_positive",
+      "planted_ids": [
+        "P19"
+      ],
+      "credited_ids": [
+        "P19"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "HIGH: generate_reset_token uses random.choice() which is not cryptographically secure. An attacker who can observe tokens could predict future tokens. Use secrets.choice() or secrets.token_urlsafe() instead."
+    },
+    {
+      "idx": 68,
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 47,
+      "end_line": 50,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P20"
+      ],
+      "decoy_id": null,
+      "content": "HIGH: The decrypt_field function is vulnerable to padding oracle attacks. It doesn't validate padding in constant time and returns different error behaviors for invalid padding vs invalid plaintext. With AES-GCM (suggested above), this is mitigated by authenticated encryption. If keeping CBC, use constant-time padding validation."
+    },
+    {
+      "idx": 69,
+      "path": "ledgerloop/workers/billing.py",
+      "start_line": 13,
+      "end_line": 22,
+      "status": "true_positive",
+      "planted_ids": [
+        "P11"
+      ],
+      "credited_ids": [
+        "P11"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Silent exception swallowing: `except Exception:` catches all exceptions but does not log them. This makes debugging production failures extremely difficult. At minimum, log the exception with traceback."
+    },
+    {
+      "idx": 70,
+      "path": "ledgerloop/workers/billing.py",
+      "start_line": 25,
+      "end_line": 30,
+      "status": "unplanted",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Global mutable state accumulates across multiple calls to `run_monthly_cycle`. The counters `invoices_generated` and `_stats[\"failed\"]` are module-level globals that are never reset. If this function is called more than once (e.g., for multiple months or in tests), the returned counts will be cumulative across all runs, not per-cycle."
+    },
+    {
+      "idx": 71,
+      "path": "ledgerloop/routes/payments.py",
+      "start_line": 39,
+      "end_line": 45,
+      "status": "near_miss",
+      "planted_ids": null,
+      "credited_ids": null,
+      "near_miss_ids": [
+        "P26"
+      ],
+      "decoy_id": null,
+      "content": "Missing input validation: `charge()` uses `.get()` with defaults but doesn't validate that `card_number` is provided/non-empty or that `amount_pence` is a positive integer. Empty card number or negative amount would be passed to the payment gateway."
+    },
+    {
+      "idx": 72,
+      "path": "web/static/js/api.js",
+      "start_line": 29,
+      "end_line": 33,
+      "status": "true_positive",
+      "planted_ids": [
+        "P29"
+      ],
+      "credited_ids": [
+        "P29"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "CRITICAL: Using `eval()` to parse API responses in `loadFeatureFlags()` is a severe security vulnerability. Both `loadFeatureFlags()` and `loadThemeConfig()` should use `JSON.parse()` (or `resp.json()`) for consistent, safe parsing. Replace `eval(\"(\" + text + \")\")` with `JSON.parse(text)`."
+    },
+    {
+      "idx": 73,
+      "path": "web/static/js/dashboard.js",
+      "start_line": 23,
+      "end_line": 26,
+      "status": "true_positive",
+      "planted_ids": [
+        "P04"
+      ],
+      "credited_ids": [
+        "P04"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "XSS vulnerability: `renderCustomerNotes` uses `innerHTML` with unsanitized user input (`customer.notes`). An attacker who can control the notes field (e.g., via a compromised backend or stored XSS) could inject arbitrary HTML/JS that executes in victims' browsers. Use `textContent` or a proper sanitization library instead."
+    },
+    {
+      "idx": 74,
+      "path": "ledgerloop/auth.py",
+      "start_line": 30,
+      "end_line": 34,
+      "status": "true_positive",
+      "planted_ids": [
+        "P10"
+      ],
+      "credited_ids": [
+        "P10"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Critical JWT 'none' algorithm vulnerability: The decode_token function explicitly checks for `alg == \"none\"` and decodes without signature verification. This allows attackers to forge arbitrary tokens by setting the algorithm to 'none' and providing an empty signature. The JWT specification explicitly warns against this. Remove the 'none' algorithm handling entirely and always verify the signature."
+    },
+    {
+      "idx": 75,
+      "path": "ledgerloop/auth.py",
+      "start_line": 91,
+      "end_line": 98,
+      "status": "true_positive",
+      "planted_ids": [
+        "P25"
+      ],
+      "credited_ids": [
+        "P25"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Password logged in plaintext: The authenticate function logs the user's password via `log.info(\"login attempt email=%s password=%s\", email, password)`. This exposes credentials in log files, SIEM systems, and any log aggregation pipeline. Never log passwords or secrets. Remove the password from the log statement."
+    },
+    {
+      "idx": 76,
+      "path": "ledgerloop/db.py",
+      "start_line": 44,
+      "end_line": 46,
+      "status": "true_positive",
+      "planted_ids": [
+        "P01"
+      ],
+      "credited_ids": [
+        "P01"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Critical SQL injection vulnerability: `tenant_id` and `name` are directly interpolated into the SQL string using f-string. An attacker controlling `name` (or `tenant_id` if it comes from user input) can execute arbitrary SQL. Use parameterized queries instead."
+    },
+    {
+      "idx": 77,
+      "path": "ledgerloop/db.py",
+      "start_line": 57,
+      "end_line": 59,
+      "status": "true_positive",
+      "planted_ids": [
+        "P02"
+      ],
+      "credited_ids": [
+        "P02"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Critical SQL injection vulnerability: `order_clause` is directly concatenated into the SQL string without any validation. An attacker controlling this parameter can execute arbitrary SQL (e.g., `order_clause = \"created_at; DROP TABLE payments; --\"`). Either validate against a strict allowlist or use a safe mapping."
+    },
+    {
+      "idx": 78,
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 13,
+      "end_line": 18,
+      "status": "true_positive",
+      "planted_ids": [
+        "P22"
+      ],
+      "credited_ids": [
+        "P22"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Path traversal vulnerability: user-controlled `filename` parameter is joined with EXPORT_DIR without validation. An attacker can use `../../../etc/passwd` to read arbitrary files on the server. Validate that the resolved path stays within EXPORT_DIR using `os.path.realpath` and `os.path.commonpath`."
+    },
+    {
+      "idx": 79,
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 21,
+      "end_line": 27,
+      "status": "true_positive",
+      "planted_ids": [
+        "P23"
+      ],
+      "credited_ids": [
+        "P23"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Command injection vulnerability: `report_name` from user input is directly interpolated into a shell command with `shell=True`. An attacker can inject arbitrary commands (e.g., `summary; rm -rf /`). Also, the input HTML path `/tmp/{report_name}.html` is user-controlled, enabling path traversal. Use `subprocess.run` with a list argument and validate `report_name` against an allowlist."
+    },
+    {
+      "idx": 80,
+      "path": "ledgerloop/services/imports.py",
+      "start_line": 25,
+      "end_line": 27,
+      "status": "true_positive",
+      "planted_ids": [
+        "P16"
+      ],
+      "credited_ids": [
+        "P16"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "CRITICAL: Pickle deserialization of user-controlled cookie data allows arbitrary code execution (RCE). The `cookie_value` comes from the user's browser cookie (`request.cookies.get(\"layout\")`) and is passed directly to `pickle.loads()`. An attacker can craft a malicious pickle payload to execute arbitrary code on the server. Use JSON or a safe serialization format instead."
+    },
+    {
+      "idx": 81,
+      "path": "ledgerloop/services/imports.py",
+      "start_line": 37,
+      "end_line": 39,
+      "status": "true_positive",
+      "planted_ids": [
+        "P17"
+      ],
+      "credited_ids": [
+        "P17"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "CRITICAL: Unsafe YAML loading with `yaml.Loader` allows arbitrary code execution (RCE). The `import_mapping_yaml` function uses `yaml.load(uploaded, Loader=yaml.Loader)` which can execute arbitrary Python code during deserialization. Use `yaml.safe_load()` instead, as done correctly in `import_settings_yaml`."
+    },
+    {
+      "idx": 82,
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 19,
+      "end_line": 22,
+      "status": "duplicate",
+      "planted_ids": [
+        "P24"
+      ],
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "CRITICAL: SSRF (Server-Side Request Forgery) in `test_webhook` function. The function makes an HTTP GET request to a user-supplied URL without any validation. An attacker can provide internal URLs (e.g., `http://localhost:8080`, `http://169.254.169.254/latest/meta-data/`, `http://metadata.google.internal`) to access internal services. Use the same validation logic as `deliver_checked` (require HTTPS, public hostname)."
+    },
+    {
+      "idx": 83,
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 44,
+      "end_line": 47,
+      "status": "true_positive",
+      "planted_ids": [
+        "P30"
+      ],
+      "credited_ids": [
+        "P30"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Open redirect vulnerability: The `/continue` endpoint redirects to any URL provided in the `next` query parameter without validation. An attacker can craft a link like `/auth/continue?next=https://evil.com/phishing` to redirect users to malicious sites. Validate that the target is a relative path or an allowed host before redirecting."
+    },
+    {
+      "idx": 84,
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 42,
+      "end_line": 43,
+      "status": "true_positive",
+      "planted_ids": [
+        "P26"
+      ],
+      "credited_ids": [
+        "P26"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `log_charge_attempt` function logs the full card number in plain text. This exposes sensitive PII (payment card data) in application logs, violating PCI DSS requirements and general security best practices. Use the `masked()` function to log only the last 4 digits."
+    },
+    {
+      "idx": 85,
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 46,
+      "end_line": 58,
+      "status": "true_positive",
+      "planted_ids": [
+        "P28"
+      ],
+      "credited_ids": [
+        "P28"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "The `charge_card` function catches all exceptions and returns `{\"ok\": True, \"charge_id\": None}`, incorrectly reporting failed charges as successful. This is a critical correctness bug - failed payments will be treated as successful by callers. The bare `except:` also catches `KeyboardInterrupt` and `SystemExit`."
+    },
+    {
+      "idx": 86,
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 16,
+      "end_line": 18,
+      "status": "true_positive",
+      "planted_ids": [
+        "P18"
+      ],
+      "credited_ids": [
+        "P18"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "CRITICAL: Password hashing uses MD5, which is cryptographically broken and unsuitable for password storage. MD5 is fast and vulnerable to rainbow tables, collision attacks, and GPU-based brute force. Use a proper password hashing algorithm like bcrypt, scrypt, or Argon2 (via passlib or bcrypt library)."
+    },
+    {
+      "idx": 87,
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 38,
+      "end_line": 50,
+      "status": "true_positive",
+      "planted_ids": [
+        "P20"
+      ],
+      "credited_ids": [
+        "P20"
+      ],
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "CRITICAL: AES-ECB mode is used for field encryption. ECB mode does not provide semantic security - identical plaintext blocks produce identical ciphertext blocks, leaking patterns. It also provides no integrity/authentication. Use AES-GCM (preferred) or AES-CBC with a random IV per encryption."
+    },
+    {
+      "idx": 88,
+      "path": "ledgerloop/workers/billing.py",
+      "start_line": 7,
+      "end_line": 19,
+      "status": "duplicate",
+      "planted_ids": [
+        "P11"
+      ],
+      "credited_ids": null,
+      "near_miss_ids": null,
+      "decoy_id": null,
+      "content": "Race condition on `invoices_generated`: multiple threads increment this global variable without synchronization. The `+=` operation is not atomic (read-modify-write), so concurrent updates will be lost. Use a lock or `threading.Atomic`/`concurrent.futures` thread-safe counter."
+    }
+  ],
+  "scan_summary": {
+    "files_reviewed": 23,
+    "comments": 89,
+    "total_tokens": 473652,
+    "input_tokens": 405256,
+    "output_tokens": 68396,
+    "cache_read_tokens": 197280,
+    "elapsed": "9m30s"
+  },
+  "scan_status": "success",
+  "llm": {
+    "provider": "demo-endpoint",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b"
+  },
+  "rules": {
+    "rules_version": 2,
+    "line_window": 3,
+    "decoy_window": 2
+  },
+  "run_meta": {
+    "label": "run3-nemotron-ultra",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b",
+    "base_url": "https://integrate.api.nvidia.com/v1",
+    "temperature": 0,
+    "started_utc": "2026-11-21T12:43:02Z",
+    "finished_utc": "2026-11-21T12:52:31Z",
+    "exit_code": 0,
+    "ocr_version": "open-code-review v1.14.0 (d29ca204) linux/amd64",
+    "command": "ocr scan --repo <isolated fixture copy> --format json --concurrency 4"
+  },
+  "llm_calls": 66
+}

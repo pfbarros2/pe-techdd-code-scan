@@ -1,0 +1,8 @@
+{
+  "name": "pe-techdd-code-scan",
+  "private": true,
+  "description": "Pins the Open Code Review CLI used by this demo",
+  "devDependencies": {
+    "@alibaba-group/open-code-review": "1.14.0"
+  }
+}

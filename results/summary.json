@@ -1,0 +1,307 @@
+{
+  "runs": [
+    {
+      "run": "run1-nemotron-ultra",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "exit_code": 0,
+      "scan_status": "success",
+      "findings": 84,
+      "detected": 29,
+      "planted": 30,
+      "recall": 0.9667,
+      "precision_strict": 0.381,
+      "precision_unique": 0.358,
+      "true_positive_findings": 32,
+      "duplicates": 5,
+      "near_miss": 14,
+      "decoy_fp": 3,
+      "decoys_flagged": [
+        "D02",
+        "D05",
+        "D10"
+      ],
+      "unplanted": 35,
+      "missed_ids": [
+        "P13"
+      ],
+      "llm_calls": 53,
+      "input_tokens": 306001,
+      "output_tokens": 56438,
+      "total_tokens": 362439,
+      "elapsed": "7m34s"
+    },
+    {
+      "run": "run2-nemotron-ultra",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "exit_code": 0,
+      "scan_status": "success",
+      "findings": 91,
+      "detected": 29,
+      "planted": 30,
+      "recall": 0.9667,
+      "precision_strict": 0.3846,
+      "precision_unique": 0.3412,
+      "true_positive_findings": 35,
+      "duplicates": 7,
+      "near_miss": 20,
+      "decoy_fp": 1,
+      "decoys_flagged": [
+        "D07"
+      ],
+      "unplanted": 35,
+      "missed_ids": [
+        "P09"
+      ],
+      "llm_calls": 49,
+      "input_tokens": 279349,
+      "output_tokens": 53688,
+      "total_tokens": 333037,
+      "elapsed": "8m20s"
+    },
+    {
+      "run": "run3-nemotron-ultra",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "exit_code": 0,
+      "scan_status": "success",
+      "findings": 89,
+      "detected": 28,
+      "planted": 30,
+      "recall": 0.9333,
+      "precision_strict": 0.3258,
+      "precision_unique": 0.3182,
+      "true_positive_findings": 29,
+      "duplicates": 3,
+      "near_miss": 18,
+      "decoy_fp": 1,
+      "decoys_flagged": [
+        "D02"
+      ],
+      "unplanted": 41,
+      "missed_ids": [
+        "P09",
+        "P15"
+      ],
+      "llm_calls": 66,
+      "input_tokens": 405256,
+      "output_tokens": 68396,
+      "total_tokens": 473652,
+      "elapsed": "9m30s"
+    }
+  ],
+  "planted_detected_in_every_run": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P10",
+    "P11",
+    "P12",
+    "P14",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P21",
+    "P22",
+    "P23",
+    "P24",
+    "P25",
+    "P26",
+    "P27",
+    "P28",
+    "P29",
+    "P30"
+  ],
+  "planted_detected_in_any_run": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P21",
+    "P22",
+    "P23",
+    "P24",
+    "P25",
+    "P26",
+    "P27",
+    "P28",
+    "P29",
+    "P30"
+  ],
+  "planted_never_detected": [],
+  "per_issue_runs": {
+    "P01": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P02": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P03": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P04": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P05": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P06": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P07": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P08": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P09": [
+      "run1-nemotron-ultra"
+    ],
+    "P10": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P11": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P12": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P13": [
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P14": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P15": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra"
+    ],
+    "P16": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P17": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P18": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P19": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P20": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P21": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P22": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P23": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P24": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P25": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P26": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P27": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P28": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P29": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ],
+    "P30": [
+      "run1-nemotron-ultra",
+      "run2-nemotron-ultra",
+      "run3-nemotron-ultra"
+    ]
+  },
+  "totals": {
+    "llm_calls": 168,
+    "input_tokens": 990606,
+    "output_tokens": 178522,
+    "total_tokens": 1169128
+  }
+}

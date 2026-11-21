@@ -1,0 +1,61 @@
+[ocr] Skipping README.md — filtered by path/extension rules
+[ocr] Skipping requirements.txt — filtered by path/extension rules
+[ocr] Filtered 2 file(s) by include/exclude rules
+[ocr] full-scan: 25 file(s) discovered, reviewing 23 in /tmp/pe-techdd-scan-work/quillmoor-ledger
+[ocr] estimated cost: ~19 file(s), est. 329K input + 96K output ≈ 425K total tokens (rough; actual reported after run)
+[ocr] scan dispatch: 3 batch(es) by by-language strategy
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✘ code_comment failed: Error: failed to parse 'comments' JSON string: unexpected end of JSON input
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr] scan dedup batch #1: 12 → 11 comments
+[ocr]   ▶ file_read file_path=ledgerloop/services/imports.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_read file_path=ledgerloop/services/webhooks.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_read file_path=ledgerloop/auth.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ file_read file_path=ledgerloop/config.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (1ms)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ✔ code_comment (27.968s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr] scan dedup batch #2: 77 → 70 comments
+[ocr] Results written to results/run1-nemotron-ultra/scan.json

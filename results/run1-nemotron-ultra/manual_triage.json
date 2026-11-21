@@ -1,0 +1,453 @@
+{
+  "run": "run1-nemotron-ultra",
+  "reviewer": "manual review by the demo author (judgement, not ground truth)",
+  "scope": "All findings the rules did not count as true positives, plus true-positive findings spotted as keyword mis-credits.",
+  "labels": {
+    "security_valid": "real security weakness that was not planted",
+    "quality_valid": "correct non-security observation (reliability, maintainability)",
+    "speculative_or_low_value": "hedged, stylistic or low-value",
+    "incorrect": "factually wrong about this code",
+    "rule_miscredit": "counted as TP/duplicate by keyword rules but about something else"
+  },
+  "counts": {
+    "incorrect": 5,
+    "quality_valid": 26,
+    "rule_miscredit": 2,
+    "security_valid": 5,
+    "speculative_or_low_value": 16
+  },
+  "items": [
+    {
+      "idx": 0,
+      "rule_status": "unplanted",
+      "path": "web/templates/dashboard.html",
+      "start_line": 14,
+      "label": "speculative_or_low_value",
+      "note": "Jinja2 autoescapes; comment itself concedes it is only a risk if |safe were used."
+    },
+    {
+      "idx": 1,
+      "rule_status": "unplanted",
+      "path": "web/templates/dashboard.html",
+      "start_line": 13,
+      "label": "speculative_or_low_value",
+      "note": "Possible 'None' rendering; minor."
+    },
+    {
+      "idx": 2,
+      "rule_status": "unplanted",
+      "path": "web/templates/dashboard.html",
+      "start_line": 9,
+      "label": "quality_valid",
+      "note": "Accessibility suggestion (aria-live); not security."
+    },
+    {
+      "idx": 3,
+      "rule_status": "near_miss",
+      "path": "web/static/js/dashboard.js",
+      "start_line": 33,
+      "label": "speculative_or_low_value",
+      "note": "Magic number style nit."
+    },
+    {
+      "idx": 4,
+      "rule_status": "unplanted",
+      "path": "web/static/js/dashboard.js",
+      "start_line": 4,
+      "label": "speculative_or_low_value",
+      "note": "Hardcoded locale; product decision, not a defect."
+    },
+    {
+      "idx": 5,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/config.py",
+      "start_line": 37,
+      "label": "speculative_or_low_value",
+      "note": "Mutable class attribute; theoretical."
+    },
+    {
+      "idx": 6,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/db.py",
+      "start_line": 6,
+      "label": "quality_valid",
+      "note": "settings is imported but unused in db.py."
+    },
+    {
+      "idx": 7,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/db.py",
+      "start_line": 8,
+      "label": "quality_valid",
+      "note": "Unused logger in db.py."
+    },
+    {
+      "idx": 8,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/db.py",
+      "start_line": 37,
+      "label": "quality_valid",
+      "note": "Cursor not closed in execute()."
+    },
+    {
+      "idx": 9,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 16,
+      "label": "speculative_or_low_value",
+      "note": "get_json(force=True) content-type strictness; minor."
+    },
+    {
+      "idx": 10,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/app.py",
+      "start_line": 12,
+      "label": "quality_valid",
+      "note": "logging.basicConfig in app factory only applies once."
+    },
+    {
+      "idx": 11,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 47,
+      "label": "quality_valid",
+      "note": "Inconsistent error response format."
+    },
+    {
+      "idx": 12,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 37,
+      "label": "speculative_or_low_value",
+      "note": "Performance suggestion for summing invoice lines."
+    },
+    {
+      "idx": 13,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/notifications.py",
+      "start_line": 9,
+      "label": "speculative_or_low_value",
+      "note": "Missing docstrings."
+    },
+    {
+      "idx": 14,
+      "rule_status": "true_positive",
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 42,
+      "label": "rule_miscredit",
+      "note": "Rule mis-credit: comment is about lazy logging performance, but its quoted code contains 'card'. P26 is genuinely detected by finding 78, so recall is unaffected."
+    },
+    {
+      "idx": 15,
+      "rule_status": "decoy_false_positive",
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 36,
+      "label": "speculative_or_low_value",
+      "note": "Decoy D10: chart colours; comment itself says current approach is acceptable. Counted as decoy FP by rule because it raises 'not cryptographically secure'."
+    },
+    {
+      "idx": 16,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 25,
+      "label": "speculative_or_low_value",
+      "note": "DNS caching performance suggestion."
+    },
+    {
+      "idx": 17,
+      "rule_status": "decoy_false_positive",
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 53,
+      "label": "incorrect",
+      "note": "Decoy D02: MD5 explicitly marked usedforsecurity=False for a cache key; flagging it is not a security defect."
+    },
+    {
+      "idx": 18,
+      "rule_status": "unplanted",
+      "path": "web/static/js/api.js",
+      "start_line": 9,
+      "label": "quality_valid",
+      "note": "Error messages omit response body; debuggability."
+    },
+    {
+      "idx": 19,
+      "rule_status": "near_miss",
+      "path": "web/static/js/dashboard.js",
+      "start_line": 18,
+      "label": "speculative_or_low_value",
+      "note": "Centralise endpoint URLs; style."
+    },
+    {
+      "idx": 20,
+      "rule_status": "near_miss",
+      "path": "web/static/js/dashboard.js",
+      "start_line": 23,
+      "label": "speculative_or_low_value",
+      "note": "Null notes on the same line as the XSS (P04); P04 itself is detected by finding 68."
+    },
+    {
+      "idx": 21,
+      "rule_status": "unplanted",
+      "path": "web/static/js/dashboard.js",
+      "start_line": 40,
+      "label": "quality_valid",
+      "note": "Sequential awaits could run in parallel."
+    },
+    {
+      "idx": 23,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/config.py",
+      "start_line": 24,
+      "label": "quality_valid",
+      "note": "Empty-string env var silently falls back to the default key; adjacent to P06 (which finding 48 detects)."
+    },
+    {
+      "idx": 24,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/db.py",
+      "start_line": 15,
+      "label": "quality_valid",
+      "note": "Thread-local connections never closed."
+    },
+    {
+      "idx": 25,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 31,
+      "label": "quality_valid",
+      "note": "Duplicate email on register gives 500."
+    },
+    {
+      "idx": 26,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 26,
+      "label": "security_valid",
+      "note": "Reset tokens stored in plaintext - genuine unplanted security issue."
+    },
+    {
+      "idx": 27,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 14,
+      "label": "security_valid",
+      "note": "No rate limiting on auth endpoints - genuine unplanted security issue."
+    },
+    {
+      "idx": 29,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/services/imports.py",
+      "start_line": 37,
+      "label": "incorrect",
+      "note": "PyYAML yaml.load accepts bytes; claimed type mismatch is wrong. (P17 is detected by finding 77.)"
+    },
+    {
+      "idx": 30,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 1,
+      "label": "incorrect",
+      "note": "Refers to the tool's own suggested fix, not to the code."
+    },
+    {
+      "idx": 31,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/invoices.py",
+      "start_line": 20,
+      "label": "incorrect",
+      "note": "sort_by is allowlisted and direction normalised in db.list_invoices_sorted (decoy D01 logic); the reviewer did not follow the call."
+    },
+    {
+      "idx": 32,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/payments.py",
+      "start_line": 28,
+      "label": "quality_valid",
+      "note": "KeyError on missing account_id gives 500."
+    },
+    {
+      "idx": 33,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/routes/payments.py",
+      "start_line": 39,
+      "label": "quality_valid",
+      "note": "Zero-amount charge not rejected."
+    },
+    {
+      "idx": 34,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/notifications.py",
+      "start_line": 6,
+      "label": "speculative_or_low_value",
+      "note": "Module-level outbox in a stub transport."
+    },
+    {
+      "idx": 35,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 13,
+      "label": "speculative_or_low_value",
+      "note": "Explicit 404 handling suggestion; the path traversal on the same lines is detected by finding 74."
+    },
+    {
+      "idx": 36,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 21,
+      "label": "speculative_or_low_value",
+      "note": "Missing source-file check; the command injection on the same lines is detected by finding 75."
+    },
+    {
+      "idx": 37,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 30,
+      "label": "speculative_or_low_value",
+      "note": "int() conversion error handling on tenant id."
+    },
+    {
+      "idx": 38,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 18,
+      "label": "quality_valid",
+      "note": "No defensive parsing of DB rows."
+    },
+    {
+      "idx": 39,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/imports.py",
+      "start_line": 13,
+      "label": "quality_valid",
+      "note": "No transaction for bulk CSV import."
+    },
+    {
+      "idx": 40,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 0,
+      "label": "quality_valid",
+      "note": "Broad except in charge_card; describes P28 but reported at line 0 so it cannot be located (P28 detected by finding 79)."
+    },
+    {
+      "idx": 41,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 12,
+      "label": "quality_valid",
+      "note": "requests exceptions propagate uncaught."
+    },
+    {
+      "idx": 42,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 47,
+      "label": "security_valid",
+      "note": "Padding check in decrypt_field (padding-oracle style concern) - additional weakness next to P20."
+    },
+    {
+      "idx": 43,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/workers/billing.py",
+      "start_line": 15,
+      "label": "quality_valid",
+      "note": "Failures in billing worker swallowed without logging."
+    },
+    {
+      "idx": 44,
+      "rule_status": "near_miss",
+      "path": "web/static/js/api.js",
+      "start_line": 35,
+      "label": "quality_valid",
+      "note": "No status check before parsing response in loadThemeConfig/loadFeatureFlags."
+    },
+    {
+      "idx": 45,
+      "rule_status": "near_miss",
+      "path": "web/static/js/dashboard.js",
+      "start_line": 18,
+      "label": "quality_valid",
+      "note": "No error handling in async UI functions."
+    },
+    {
+      "idx": 49,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/routes/auth_routes.py",
+      "start_line": 23,
+      "label": "quality_valid",
+      "note": "Password reset never sends the token; functional bug."
+    },
+    {
+      "idx": 50,
+      "rule_status": "decoy_false_positive",
+      "path": "ledgerloop/routes/exports.py",
+      "start_line": 30,
+      "label": "incorrect",
+      "note": "Decoy D05: list-argument subprocess with int-coerced tenant id; no command injection or traversal."
+    },
+    {
+      "idx": 57,
+      "rule_status": "near_miss",
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 15,
+      "label": "quality_valid",
+      "note": "withdraw() not wrapped in a transaction."
+    },
+    {
+      "idx": 58,
+      "rule_status": "duplicate",
+      "path": "ledgerloop/services/payments.py",
+      "start_line": 26,
+      "label": "rule_miscredit",
+      "note": "Rule mis-credit (duplicate): about missing transaction in issue_refund; counted as a duplicate for P21 so it does not change recall."
+    },
+    {
+      "idx": 59,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/reports.py",
+      "start_line": 10,
+      "label": "quality_valid",
+      "note": "Unsynchronised module-level cache."
+    },
+    {
+      "idx": 61,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/imports.py",
+      "start_line": 13,
+      "label": "quality_valid",
+      "note": "CSV header validation."
+    },
+    {
+      "idx": 62,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 25,
+      "label": "quality_valid",
+      "note": "gethostbyname is IPv4-only."
+    },
+    {
+      "idx": 63,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/services/webhooks.py",
+      "start_line": 33,
+      "label": "security_valid",
+      "note": "DNS rebinding against _is_public_host check - genuine residual SSRF risk in deliver_checked (not labelled a decoy for this reason)."
+    },
+    {
+      "idx": 65,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/utils/crypto.py",
+      "start_line": 13,
+      "label": "security_valid",
+      "note": "Same key reused for JWT signing and field encryption."
+    },
+    {
+      "idx": 66,
+      "rule_status": "unplanted",
+      "path": "ledgerloop/workers/billing.py",
+      "start_line": 25,
+      "label": "quality_valid",
+      "note": "Counters not reset between cycles."
+    }
+  ]
+}
