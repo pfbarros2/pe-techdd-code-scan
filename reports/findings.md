@@ -122,6 +122,23 @@ auth endpoints, DNS rebinding against the webhook allowlist check, key reuse bet
 and an unchecked padding strip in `decrypt_field`. The fixture was not designed to contain these, which is why strict
 precision understates usefulness; the `incorrect` items are the genuine noise a reviewer must filter.
 
+## Detection audit (manual check of keyword credits)
+
+Manual check by the demo author (judgement): for each run, every planted issue credited by the rules was checked for at least one matched finding that is genuinely about that issue. Also lists findings that the rules credited first but that are about something else (keyword mis-credits).
+
+| Run | Credited issues with no on-topic finding | Mis-credited findings |
+|---|---|---|
+| run1-nemotron-ultra | 0 | 2 |
+| run2-nemotron-ultra | 0 | 3 |
+| run3-nemotron-ultra | 0 | 1 |
+
+Mis-credits inflate the *TP findings* and *strict precision* columns slightly but did not change recall in the audited runs.
+
+## Categories with misses
+
+- auth_bypass: missed in run2-nemotron-ultra, run3-nemotron-ultra
+- null_handling: missed in run1-nemotron-ultra, run3-nemotron-ultra
+
 ## How to read this
 
 This is a single small, synthetic codebase with deliberately obvious defects. High recall here does not predict

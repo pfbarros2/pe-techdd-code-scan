@@ -74,3 +74,14 @@ def test_git_history_has_no_key_prefix():
     out = subprocess.run(["git", "log", "--all", "-p", "-S" + KEY_PREFIX, "--format=%H"], cwd=ROOT,
                          capture_output=True, text=True)
     assert out.stdout.strip() == ""
+
+
+def test_manual_triage_covers_current_non_tp_findings():
+    tri = ROOT / "results" / "run1-nemotron-ultra" / "manual_triage.json"
+    if not tri.exists():
+        pytest.skip("no triage")
+    t = json.loads(tri.read_text())
+    sc = json.loads((ROOT / "results" / "run1-nemotron-ultra" / "score.json").read_text())
+    want = {f["idx"] for f in sc["findings"] if f["status"] in ("unplanted", "near_miss", "decoy_false_positive")}
+    got = {i["idx"] for i in t["items"] if i["label"] != "rule_miscredit"}
+    assert want == got

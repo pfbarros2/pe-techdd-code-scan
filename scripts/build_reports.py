@@ -149,6 +149,21 @@ auth endpoints, DNS rebinding against the webhook allowlist check, key reuse bet
 and an unchecked padding strip in `decrypt_field`. The fixture was not designed to contain these, which is why strict
 precision understates usefulness; the `incorrect` items are the genuine noise a reviewer must filter.
 """
+audit_path = RES / "detection_audit.json"
+if audit_path.exists():
+    au = json.loads(audit_path.read_text())
+    findings_md += "\n## Detection audit (manual check of keyword credits)\n\n" + au["method"] + "\n\n| Run | Credited issues with no on-topic finding | Mis-credited findings |\n|---|---|---|\n"
+    for run, a in au["runs"].items():
+        findings_md += f"| {run} | {len(a['credited_issues_without_on_topic_finding'])} | {len(a['miscredited_findings'])} |\n"
+    findings_md += "\nMis-credits inflate the *TP findings* and *strict precision* columns slightly but did not change recall in the audited runs.\n"
+
+missed_cats = {}
+for r in runs:
+    for pid in r["missed_ids"]:
+        missed_cats.setdefault(planted[pid]["category"], set()).add(r["run"])
+findings_md += "\n## Categories with misses\n\n" + ("".join(
+    f"- {c}: missed in {', '.join(sorted(v))}\n" for c, v in sorted(missed_cats.items())) or "- none\n")
+
 findings_md += """
 ## How to read this
 
