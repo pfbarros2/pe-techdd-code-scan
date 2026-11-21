@@ -52,9 +52,11 @@ ground_truth/manifest.json ──────────────> scripts/s
   (upstream tag `v1.14.0`, commit `d29ca2044a42ea297a7fa93692d0f5ac8f38d84e`). Default settings apart from
   `--concurrency 4` and a 60-minute task budget.
 - **Model endpoint:** any OpenAI-compatible Chat Completions endpoint with tool calling. The recorded runs used the
-  NVIDIA API catalog (`https://integrate.api.nvidia.com/v1`) with `nvidia/nemotron-3-ultra-550b-a55b` (3 runs) and
-  `mistralai/mistral-large-4-1t-a52b` (1 run). `temperature: 0` is sent through OCR's `extra_body`; the models still
-  produced different output on repeat runs (see results).
+  NVIDIA API catalog (`https://integrate.api.nvidia.com/v1`) with `nvidia/nemotron-3-ultra-550b-a55b` (3 complete
+  runs). A fourth run with `mistralai/mistral-large-4-1t-a52b` was started but stopped by hand because the endpoint
+  was too slow (3 of 23 files reviewed in about 28 minutes); it produced no results and is excluded from scoring, but
+  its token use is recorded in `results/run4-mistral-large/aborted_run.json`. `temperature: 0` is sent through OCR's
+  `extra_body`; the model still produced different output on repeat runs (see results).
 - **Key handling:** the run script reads the key file into an environment variable for that process only and points
   OCR at it with `api_key_cmd = printenv DEMO_LLM_API_KEY`, using an isolated OCR home under `/tmp`. The key is never
   written to config, arguments, logs or results; logs are scrubbed as a second line of defence.
@@ -106,6 +108,8 @@ strict precision 38.1% (32 of 84 findings matched a planted issue),
 Across 3 `nemotron-3-ultra` runs: detected 28-29 of 30, findings 84-91.
 Across all 3 runs: 27 issues found every time; never found: none.
 Totals for all runs: 168 LLM calls, 990,606 input + 178,522 output tokens.
+Aborted, not scored: `run4-mistral-large` (`mistralai/mistral-large-4-1t-a52b`) - 3 of 23 files reviewed, 31 LLM calls, 132,230 prompt + 21,551 completion tokens (from OCR's session log). Reason: Endpoint responses were far slower than for Nemotron (first response took 66 s); after about 28 minutes only 3 of 23 files had been reviewed, so the run was stopped to keep time and token use reasonable. No scan.json was produced and this run is excluded from all scoring.
+
 <!-- RESULTS:END -->
 
 Details: [reports/findings.md](reports/findings.md) · Heatmap: [reports/heatmap.md](reports/heatmap.md)
@@ -144,6 +148,7 @@ because the same issues were also found by correctly matched findings.
   deployed in the client's own cloud tenancy).
 - **Synthetic, small, obvious.** About 900 lines with deliberately textbook defects. Real codebases are larger,
   the defects are subtler and cross many files. Do not read the recall here as a prediction for a real target.
+- **One model.** Only one model completed runs, so this says nothing about how other models compare.
 - **Run-to-run variance.** Even at temperature 0 the findings changed between runs. A DD process should merge
   several runs or pair the scan with deterministic tools (SAST, secret scanning, dependency audit).
 - **Repo maturity.** The public Open Code Review repository was created in May 2026 and changes quickly; v1.14.0

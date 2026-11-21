@@ -144,3 +144,7 @@ Mis-credits inflate the *TP findings* and *strict precision* columns slightly bu
 This is a single small, synthetic codebase with deliberately obvious defects. High recall here does not predict
 recall on a real, large, idiomatic codebase where defects are subtle and span many files. The value of the run is
 the workflow (scan -> score -> heatmap -> remediation plan) and the measurement method, not the headline number.
+
+## Aborted runs
+
+Aborted, not scored: `run4-mistral-large` (`mistralai/mistral-large-4-1t-a52b`) - 3 of 23 files reviewed, 31 LLM calls, 132,230 prompt + 21,551 completion tokens (from OCR's session log). Reason: Endpoint responses were far slower than for Nemotron (first response took 66 s); after about 28 minutes only 3 of 23 files had been reviewed, so the run was stopped to keep time and token use reasonable. No scan.json was produced and this run is excluded from all scoring.

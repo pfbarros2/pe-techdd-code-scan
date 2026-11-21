@@ -1,0 +1,62 @@
+[ocr] Skipping README.md — filtered by path/extension rules
+[ocr] Skipping requirements.txt — filtered by path/extension rules
+[ocr] Filtered 2 file(s) by include/exclude rules
+[ocr] full-scan: 25 file(s) discovered, reviewing 23 in /tmp/pe-techdd-scan-work/quillmoor-ledger
+[ocr] estimated cost: ~19 file(s), est. 329K input + 96K output ≈ 425K total tokens (rough; actual reported after run)
+[ocr] scan dispatch: 3 batch(es) by by-language strategy
+[ocr]   ▶ code_search search_text=dashboard.html
+[ocr]   ✔ code_search (3ms)
+[ocr]   ▶ code_search
+[ocr]   ✔ code_search (3ms)
+[ocr]   ▶ code_search search_text=render_template|Flask\( file_patterns=[*.py]
+[ocr]   ✔ code_search (2ms)
+[ocr]   ▶ file_find query_name=dashboard.js
+[ocr]   ✔ file_find (2ms)
+[ocr]   ▶ file_read file_path=web/static/js/dashboard.js
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_search file_patterns=[ledgerloop/utils/crypto.py] search_text=def constant_time_equals
+[ocr]   ✔ code_search (4ms)
+[ocr]   ▶ code_search search_text=X-Debug-Admin
+[ocr]   ✔ code_search (2ms)
+[ocr]   ▶ file_read file_path=ledgerloop/utils/crypto.py start_line=30 end_line=45
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ code_search file_patterns=[ledgerloop/services/imports.py]
+[ocr]   ✔ code_search (4ms)
+[ocr]   ▶ code_search search_text=def test_webhook|requests\.|urlopen|httpx file_patterns=[ledgerloop/services/webhooks.py]
+[ocr]   ✔ code_search (2ms)
+[ocr]   ▶ file_find query_name=imports.py
+[ocr]   ✔ file_find (2ms)
+[ocr]   ▶ file_find query_name=webhooks.py
+[ocr]   ✔ file_find (1ms)
+[ocr]   ▶ file_read file_path=ledgerloop/services/imports.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_read file_path=ledgerloop/services/webhooks.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ file_read file_path=ledgerloop/routes/__init__.py
+[ocr]   ✔ file_read (0s)
+[ocr]   ▶ file_find query_name=routes
+[ocr]   ✔ file_find (3ms)
+[ocr]   ▶ code_search search_text=JWT_SIGNING_KEY
+[ocr]   ✔ code_search (3ms)
+[ocr]   ▶ code_search search_text=PAYRIVER_SECRET
+[ocr]   ✔ code_search (3ms)
+[ocr]   ▶ code_search search_text=settings.DEBUG|Settings.DEBUG|\.DEBUG\b
+[ocr]   ✔ code_search (2ms)
+[ocr]   ▶ code_search search_text=DEBUG
+[ocr]   ✔ code_search (2ms)
+[ocr]   ▶ code_comment
+[ocr]   ✔ code_comment (0s)
+[ocr]   ▶ code_comment
+[ocr]   ▶ code_comment "ledgerloop/config.py"
+[ocr]   ▶ code_comment "ledgerloop/config.py"
+[ocr]   ✔ code_comment (1ms)
+[ocr]   ✔ code_comment (1ms)
+[ocr]   ✔ code_comment (5ms)

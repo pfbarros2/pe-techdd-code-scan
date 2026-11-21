@@ -1,0 +1,21 @@
+{
+  "label": "run4-mistral-large",
+  "model": "mistralai/mistral-large-4-1t-a52b",
+  "status": "aborted_by_operator",
+  "reason": "Endpoint responses were far slower than for Nemotron (first response took 66 s); after about 28 minutes only 3 of 23 files had been reviewed, so the run was stopped to keep time and token use reasonable. No scan.json was produced and this run is excluded from all scoring.",
+  "session_log_first_event_utc": "2026-11-21T12:52:32Z",
+  "session_log_last_event_utc": "2026-11-21T13:13:35Z",
+  "llm_requests": 31,
+  "llm_responses": 27,
+  "files_completed": [
+    "web/templates/dashboard.html",
+    "web/static/js/api.js",
+    "web/static/js/dashboard.js"
+  ],
+  "usage_from_session_log": {
+    "cache_read_tokens": 84608,
+    "cache_write_tokens": 0,
+    "completion_tokens": 21551,
+    "prompt_tokens": 132230
+  }
+}
