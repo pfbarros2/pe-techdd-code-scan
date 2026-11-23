@@ -280,20 +280,4 @@ Totals for all runs: {summary['totals']['llm_calls']} LLM calls, {tok(summary['t
 readme = (ROOT / "README.md").read_text()
 readme = re.sub(r"<!-- RESULTS:START.*?<!-- RESULTS:END -->", lambda _m: block, readme, flags=re.S)
 (ROOT / "README.md").write_text(readme)
-li_body = f"""Can an open-source AI code reviewer help with tech due diligence?
-
-I pointed Alibaba's Open Code Review at a small fictional SaaS codebase with {len(planted)} planted defects and {len(decoys)} pieces of
-safe code that only look risky. Then I scored every finding against that answer key.
-
-In the main run it surfaced {ps['planted_detected']} of the {ps['planted_total']} planted issues. It also raised many other comments, so strict
-precision was {pct(ps['precision_strict'])}, and results changed between repeat runs even at temperature 0.
-
-My takeaway: the scanner is the cheap part. The useful part is the scoring, the triage of noise, and turning
-findings into a RAG view and a 100-day plan a deal team can act on.
-
-Synthetic code only. Real code would need consent and a private model endpoint.
-"""
-(ROOT / "notes" / "linkedin-draft.md").write_text(
-    "# LinkedIn post - DRAFT – not approved\n\n> DRAFT – not approved. Do not post without explicit approval.\n"
-    "> Numbers generated from results/ by scripts/build_reports.py.\n\n" + li_body)
 print("reports written")

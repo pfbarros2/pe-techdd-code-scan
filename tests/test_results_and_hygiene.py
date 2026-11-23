@@ -54,12 +54,9 @@ def test_every_run_has_real_output_and_metadata():
         assert len(scan["comments"]) == r["findings"]
 
 
-def test_linkedin_draft_rules():
-    text = (ROOT / "notes" / "linkedin-draft.md").read_text()
-    assert "DRAFT – not approved" in text
-    body = text.split("\n\n", 2)[-1]
-    assert len(body.split()) < 150
-    assert not re.search(r"certified|proven|deloitte", text, re.I)
+def test_no_unapproved_drafts_or_internal_notes():
+    assert not (ROOT / "notes" / "linkedin-draft.md").exists()
+    assert not (ROOT / "notes" / "CHECKPOINT.md").exists()
 
 
 def test_no_deloitte_branding_in_deliverables():

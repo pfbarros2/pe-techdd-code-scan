@@ -1,5 +1,7 @@
 # pe-techdd-code-scan
 
+> **Prototype.** This is a demonstration built on synthetic data only. It is not production software and has not been validated for real use. See [Limitations](#limitations-and-caveats).
+
 **An honest, measured trial of AI code review for private-equity technology due diligence.**
 
 This repo runs [Open Code Review](https://github.com/alibaba/open-code-review) (Alibaba, Apache-2.0), unmodified,
@@ -30,7 +32,6 @@ results/<run>/              real tool output (scan.json), scrubbed stderr log, r
 results/summary.json        per-run metrics, cross-run consistency, total calls/tokens
 reports/                    findings.md, heatmap.md/.html/.png, remediation_100_day.md
 tests/                      pytest: manifest integrity, matching rules, fixture hygiene, results/README consistency
-notes/                      CHECKPOINT.md (build log), linkedin-draft.md (DRAFT - not approved)
 ```
 
 ## Architecture
